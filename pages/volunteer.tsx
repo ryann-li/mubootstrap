@@ -12,8 +12,9 @@ export default function Volunteer() {
 
     const type_options: string[] = [
         "Fundraising",
-        "Material Development (Helping us imporve our curricula)",
-        "Both",
+        "Material Development (Helping us improve our curricula)",
+        "Outreach",
+        "Any"
     ];
 
     const experience_options: string[] = [
