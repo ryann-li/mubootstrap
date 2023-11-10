@@ -37,6 +37,7 @@ function SubmitMUForm(e: React.FormEvent<HTMLFormElement>, url: string, form: an
   });
 }
 
+// components/muform.tsx
 export default function MUForm(props: { children?: React.ReactNode, webhookIdentifier: string, className?: string }) {
   const [submit_disabled, SetSubmitDisabled] = useState(false);
   const [submit_button_name, SetSubmitButtonName] = useState("Submit");
@@ -55,6 +56,7 @@ export default function MUForm(props: { children?: React.ReactNode, webhookIdent
     <Bin>
       <div className={props.className}>
         <form name="main_form" method='post' onSubmit={e => AttemptSubmission(e, "/api/submitForm", props.webhookIdentifier)}>
+          <input type="text" name="honeypot" style={{ display: 'none' }} />
           {props.children}
           <button disabled={submit_disabled} className='bg-blue-600 text-white p-3 rounded-md' type="submit">{submit_button_name}</button>
         </form>
@@ -62,6 +64,7 @@ export default function MUForm(props: { children?: React.ReactNode, webhookIdent
     </Bin>
   )
 }
+
 
 export function Field(props: { children: string, name: string, required?: boolean, type?: string }) {
   const input_class: string = "w-full p-3 border-b-2";

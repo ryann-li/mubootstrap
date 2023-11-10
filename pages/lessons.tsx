@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import SheetMusic from '../assets/sheet_music.jpg';
 import MUPage from "../components/page";
 import { Accordian, Bin, HR, PageTitle } from "../components/util";
@@ -30,10 +31,14 @@ export default function Lessons() {
             <HR />
             <Bin className='my-24'>
                 {vals.map(
-                    (element, i)=>{
-                        return <Accordian key={i} title={element[0]}>{element[1]}</Accordian>
-                })}
-                <button className="px-4 py-3 bg-blue-300 text-white text-lg my-8  rounded-md">Register</button>
+                    (element, i) => (
+                        <Accordian key={i} title={element[0]}>{element[1]}</Accordian>
+                ))}
+                <div className="mt-8">
+                    <Link href="/register" passHref legacyBehavior>
+                        <a className="px-4 py-3 bg-blue-600 text-white text-lg rounded-md hover:bg-blue-700 no-underline">Register</a>
+                    </Link>
+                </div>
             </Bin>
         </MUPage>
     )

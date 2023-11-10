@@ -44,6 +44,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
+  if (req.body.honeypot) {
+    return res.status(400).json({ error: "Bot detected." });
+  }
+
   const form = req.body;
   const webhookIdentifier = form.whurl;
   const whurl = webhookUrls[webhookIdentifier];
