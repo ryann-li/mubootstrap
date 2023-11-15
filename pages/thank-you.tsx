@@ -8,7 +8,6 @@ export default function ThankYou() {
     const [iconColor, setIconColor] = useState(null);
 
     useEffect(() => {
-        // This code runs only on the client side
         setIconColor("rgb(37, 99, 235)");
     }, []);
 
