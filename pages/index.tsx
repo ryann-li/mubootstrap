@@ -41,7 +41,7 @@ export default function Home() {
                     <ConcertText className='text-xl my-3 text-center mx-4 md:mx-16 pb-16'>
                         Get ready for an afternoon of classical music as we present the Music Spirit Society and Music Unbounded 2nd Annual Charity.
                         <br/>
-                        <a style={{border: 0}}
+                        <a style={{border: 0}} target={'_blank'}
                             className="from-blue-800 to-blue-600 bg-gradient-to-r text-white tracking-[.1em] px-4 py-3 font-noto text-xl rounded-lg transition-all duration-500 shadow-lg shadow-white btn-success btn mt-3 btn-lg" href="https://www.eventbrite.com/e/music-spirit-society-and-music-unbounded-2nd-annual-charity-concert-tickets-760948105267?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=ebdsshcopyurl">Buy Now</a>
                     </ConcertText>
                 </Bin>
