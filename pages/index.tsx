@@ -35,7 +35,7 @@ export default function Home() {
                     <ConcertText>Music Unbounded</ConcertText>
                     <ConcertText>Presents</ConcertText>
                     <div className='my-10 font-news text-center text-white font-bold md:text-6xl text-4xl'>Annual Charity Concert</div>
-                    <ConcertText>August 25 2023</ConcertText>
+                    <ConcertText>June 6 2024</ConcertText>
                     <ConcertText className='my-3 text-white font-bold'>Muttart Hall</ConcertText>
                     <ConcertText className='italic font-thin'>3:40 pm - 5:30 pm</ConcertText>
                     <ConcertText className='text-xl my-3 text-center mx-4 md:mx-16 pb-16'>
