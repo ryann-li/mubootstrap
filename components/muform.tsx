@@ -136,7 +136,38 @@ export function PhoneField() {
 }
 
 export function EmailField() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const validateEmail = (value: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      setError("Please enter a valid email address.");
+    } else {
+      setError("");
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+    validateEmail(value);
+  };
+
   return (
-    <Field name='Email' type='email' required={true}>Email</Field>
-  )
+    <div className='mb-5 text-lg'>
+      <div className='pb-2'><label htmlFor="Email">Email</label></div>
+      <input
+        placeholder="Email"
+        className="w-full p-3 border-b-2 rounded-md"
+        type="email"
+        id="Email"
+        name="Email"
+        value={email}
+        onChange={handleChange}
+        required
+      />
+      {error && <p className="text-red-500">{error}</p>}
+    </div>
+  );
 }
