@@ -65,7 +65,6 @@ export default function MUForm(props: { children?: React.ReactNode, webhookIdent
   )
 }
 
-
 export function Field(props: { children: string, name: string, required?: boolean, type?: string }) {
   const input_class: string = "w-full p-3 border-b-2";
 
@@ -101,9 +100,39 @@ export function Dropdown(props: { children: string, label: string, options: stri
 }
 
 export function PhoneField() {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [error, setError] = useState("");
+
+  const validatePhoneNumber = (value: string) => {
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(value)) {
+      setError("Please enter a valid 10-digit phone number.");
+    } else {
+      setError("");
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPhoneNumber(value);
+    validatePhoneNumber(value);
+  };
+
   return (
-    <Field name="Phone Number" type='tel' required={false}>Phone Number (Optional)</Field>
-  )
+    <div className='mb-5 text-lg'>
+      <div className='pb-2'><label htmlFor="PhoneNumber">Phone Number (Optional)</label></div>
+      <input
+        placeholder="Phone Number (Optional)"
+        className="w-full p-3 border-b-2 rounded-md"
+        type="tel"
+        id="PhoneNumber"
+        name="PhoneNumber"
+        value={phoneNumber}
+        onChange={handleChange}
+      />
+      {error && <p className="text-red-500">{error}</p>}
+    </div>
+  );
 }
 
 export function EmailField() {
