@@ -3,7 +3,6 @@ import { RxCross1, RxHamburgerMenu } from 'react-icons/rx';
 import useComponentVisible from '../logic/use_component_visible';
 import { nav_options, single_nav_options } from '../page_data/nav_options';
 import { HR, InternalLink } from './util';
-
 /**
  * 
  * @param props children
@@ -16,7 +15,6 @@ function MUNavItem(props: { children: React.ReactNode }) {
         </div>
     )
 }
-
 /**
  * 
  * @param props children
