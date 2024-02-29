@@ -30,22 +30,22 @@ export default function Home() {
     return (
         <MUPage>
 
-            <div className='bg-repeat-x bg-bottom bg-gradient-to-r from-red-600 to-purple-600 min-h-screen'>
-                <Bin className='py-16'>
-                    <ConcertText>Music Unbounded</ConcertText>
-                    <ConcertText>Presents</ConcertText>
-                    <div className='my-10 font-news text-center text-white font-bold md:text-6xl text-4xl'>Annual Charity Concert</div>
-                    <ConcertText>January 6 2024</ConcertText>
-                    <ConcertText className='my-3 text-white font-bold'>Muttart Hall</ConcertText>
-                    <ConcertText className='italic font-thin'>3:40 pm - 5:30 pm</ConcertText>
-                    <ConcertText className='text-xl my-3 text-center mx-4 md:mx-16 pb-16'>
-                        Get ready for an afternoon of classical music as we present the Music Spirit Society and Music Unbounded 2nd Annual Charity.
-                        <br/>
-                        <a style={{border: 0}} target={'_blank'}
-                            className="from-blue-800 to-blue-600 bg-gradient-to-r text-white tracking-[.1em] px-4 py-3 font-noto text-xl rounded-lg transition-all duration-500 shadow-lg shadow-white btn-success btn mt-3 btn-lg" href="https://www.eventbrite.com/e/music-spirit-society-and-music-unbounded-2nd-annual-charity-concert-tickets-760948105267?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=ebdsshcopyurl">Buy Now</a>
-                    </ConcertText>
-                </Bin>
-            </div>
+            {/*<div className='bg-repeat-x bg-bottom bg-gradient-to-r from-red-600 to-purple-600 min-h-screen'>*/}
+            {/*    <Bin className='py-16'>*/}
+            {/*        <ConcertText>Music Unbounded</ConcertText>*/}
+            {/*        <ConcertText>Presents</ConcertText>*/}
+            {/*        <div className='my-10 font-news text-center text-white font-bold md:text-6xl text-4xl'>Annual Charity Concert</div>*/}
+            {/*        <ConcertText>January 6 2024</ConcertText>*/}
+            {/*        <ConcertText className='my-3 text-white font-bold'>Muttart Hall</ConcertText>*/}
+            {/*        <ConcertText className='italic font-thin'>3:40 pm - 5:30 pm</ConcertText>*/}
+            {/*        <ConcertText className='text-xl my-3 text-center mx-4 md:mx-16 pb-16'>*/}
+            {/*            Get ready for an afternoon of classical music as we present the Music Spirit Society and Music Unbounded 2nd Annual Charity.*/}
+            {/*            <br/>*/}
+            {/*            <a style={{border: 0}} target={'_blank'}*/}
+            {/*                className="from-blue-800 to-blue-600 bg-gradient-to-r text-white tracking-[.1em] px-4 py-3 font-noto text-xl rounded-lg transition-all duration-500 shadow-lg shadow-white btn-success btn mt-3 btn-lg" href="https://www.eventbrite.com/e/music-spirit-society-and-music-unbounded-2nd-annual-charity-concert-tickets-760948105267?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=ebdsshcopyurl">Buy Now</a>*/}
+            {/*        </ConcertText>*/}
+            {/*    </Bin>*/}
+            {/*</div>*/}
             <div style={{backgroundImage:`url(${Background.src})`}} className="bg-no-repeat bg-cover bg-center flex h-screen">
                 <div className='mt-[40%] lg:mt-[12%] md:mt-[25%] sm:mt-[35%]
 ml-[5%] flex-col justify-center items-center'>

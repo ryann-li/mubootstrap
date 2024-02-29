@@ -14,6 +14,7 @@ export default function Volunteer() {
         "Fundraising",
         "Material Development (Helping us improve our curricula)",
         "Outreach",
+        "Teaching Director",
         "Any"
     ];
 
