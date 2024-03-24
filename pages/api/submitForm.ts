@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const new_app_script_url = "https://script.google.com/macros/s/AKfycbyc5P11yAcee_ANeU26HgL2p9GbQo899YHkSBKXL8LEQJGiOq1xJMk2r0xpmxlM-XA/exec";
+const new_app_script_url = "https://script.google.com/macros/s/AKfycbwraoiwRrzNhJ4yFvKjmsCrq2cLgo1bwVoVK01ZfE6SYIyhruVc5QsZpaLIcrnEQK8W/exec";
 
 const webhookUrls: { [key: string]: string } = {
   contact: "https://discord.com/api/webhooks/980246108095782943/VBFWK3HuNLMhw-UAKvAI3I4n6He9pRSfpx3DBCkqAw2GKRXySyxvcVAL1psWrAsi1SMD",
@@ -39,38 +39,39 @@ async function NotifyDiscord(form: { [key: string]: string }, whurl: string) {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method !== 'POST') {
-      res.setHeader('Allow', ['POST']);
-      return res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
-  
-    const form = req.body;
-    const webhookIdentifier = form.whurl;
-    console.log("Received webhook identifier:", webhookIdentifier); // Log the received webhook identifier
-    const whurl = webhookUrls[webhookIdentifier];
-  
-    if (!whurl) {
-      return res.status(400).json({ error: "Invalid webhook identifier" });
-    }
-  
-    try {
-      // Submit the form data to Google Apps Script
-      const response = await fetch(new_app_script_url, {
-        method: 'POST',
-        body: new URLSearchParams(form).toString(),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      });
-  
-      const data = await response.text();
-  
-      // Notify Discord
-      await NotifyDiscord(form, whurl);
-  
-      res.status(200).json({ message: 'Success', data });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', ['POST']);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
-  
+
+  const form = req.body;
+  const webhookIdentifier = form.whurl;
+  const whurl = webhookUrls[webhookIdentifier];
+
+  if (!whurl) {
+    return res.status(400).json({ error: "Invalid webhook identifier" });
+  }
+
+  try {
+    // Submit the form data to Google Apps Script
+    const response = await fetch(new_app_script_url, {
+      method: 'POST',
+      body: new URLSearchParams({
+        ...form,
+        formIdentifier: webhookIdentifier 
+      }).toString(),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+    const data = await response.text();
+
+    // Notify Discord
+    await NotifyDiscord(form, whurl);
+
+    res.status(200).json({ message: 'Success', data });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}

@@ -4,6 +4,7 @@ import { LesserPageTitle, BlueWideDiv, Blurb, BlurbTitle, PageTitle } from "../c
 
 export default function Volunteer() {
     const webhookIdentifier = "volunteer";
+    const formIdentifier = "volunteer";
 
     const type_options: string[] = [
         "Fundraising",
@@ -42,7 +43,7 @@ export default function Volunteer() {
 
             <LesserPageTitle>Fill out this form</LesserPageTitle>
 
-            <MUForm className='mb-5 mt-10' webhookIdentifier={webhookIdentifier}>
+            <MUForm className='mb-5 mt-10' formIdentifier={formIdentifier} webhookIdentifier={webhookIdentifier}>
                 <Field required={true} name="Name">Name</Field>
                 <EmailField />
                 <Dropdown label="Age" options={["Yes, 16 or older", "No, I'm younger than 16"]}>

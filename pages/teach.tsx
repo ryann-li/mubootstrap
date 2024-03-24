@@ -4,6 +4,7 @@ import { BlueWideDiv, Blurb, BlurbTitle, LesserPageTitle, PageTitle } from "../c
 
 export default function Teach() {
     const webhookIdentifier = "teach";
+    const formIdentifier = "teach";
 
     const type_options: string[] = [
         "Fundraising",
@@ -62,7 +63,7 @@ export default function Teach() {
 
             <LesserPageTitle>Fill out this form</LesserPageTitle>
 
-            <MUForm className='mb-5 mt-10' webhookIdentifier={webhookIdentifier}>
+            <MUForm className='mb-5 mt-10' formIdentifier={formIdentifier} webhookIdentifier={webhookIdentifier}>
                 <Field required={true} name="Teacher Name">Name</Field>
                 <EmailField />
                 <Dropdown label="Age" options={["At least 16", "Under 16"]}>Are you 16 years of age or older?</Dropdown>

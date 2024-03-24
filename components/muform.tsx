@@ -6,39 +6,36 @@ function RedirectToThankYou(): void {
 }
 
 function SubmitMUForm(e: React.FormEvent<HTMLFormElement>, url: string, form: any, webhookIdentifier: string): void {
-    e.preventDefault();
-  
-    const form_data = new FormData(form);
-    const form_json: { [key: string]: string } = {};
-  
-    form_data.forEach((value, key) => {
-      form_json[key] = value.toString();
-    });
-  
-    console.log("Form data being sent:", { ...form_json, whurl: webhookIdentifier }); // Log form data
-  
-    fetch(url, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...form_json, whurl: webhookIdentifier }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log("Response from API:", data);
-      if (data.message === 'Success') {
-        RedirectToThankYou(); // Assuming this is where you redirect after successful submission
-      } else {
-        alert("Failed, internal error. Please email us at support@musicunbounded.org with details.");
-      }
-    })
-    .catch(error => {
-      console.error("Error:", error);
+  e.preventDefault();
+
+  const form_data = new FormData(form);
+  const form_json: { [key: string]: string } = {};
+
+  form_data.forEach((value, key) => {
+    form_json[key] = value.toString();
+  });
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ...form_json, whurl: webhookIdentifier }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log("Response from API:", data);
+    if (data.message === 'Success') {
+      RedirectToThankYou(); // Assuming this is where you redirect after successful submission
+    } else {
       alert("Failed, internal error. Please email us at support@musicunbounded.org with details.");
-    });
-  }
-  
+    }
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    alert("Failed, internal error. Please email us at support@musicunbounded.org with details.");
+  });
+}
 
 export default function MUForm(props: { children?: React.ReactNode, webhookIdentifier: string, className?: string }) {
   const [submit_disabled, SetSubmitDisabled] = useState(false);
