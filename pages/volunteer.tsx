@@ -2,13 +2,8 @@ import MUForm, { Dropdown, EmailField, Field, PhoneField } from "../components/m
 import MUPage from "../components/page";
 import { LesserPageTitle, BlueWideDiv, Blurb, BlurbTitle, PageTitle } from "../components/util";
 
-/**
- * 
- * @returns the volunteer page
- */
 export default function Volunteer() {
-    const webapp_url: string = "kwwsv=22vfulsw1jrrjoh1frp2pdfurv2v2DNi|fez\\LOb|;O<]gn<sMyEYMG|F5{6msrWihjOV6oE9[n4ruNefRO6\\0EjHIkWbp4oi3NYYmj2h{hf";
-    const hashed: string = "kwwsv=22glvfrug1frp2dsl2zhekrrnv2435;7;64<<964<37:;<2;Y7xJ:Y{MuvKZ[zbiu[rWx0;jSv6l0VHk]nOoEP]8l}Te5iM7XQJ:0OUNiZMK0|gDPSp";
+    const webhookIdentifier = "volunteer";
 
     const type_options: string[] = [
         "Fundraising",
@@ -47,7 +42,7 @@ export default function Volunteer() {
 
             <LesserPageTitle>Fill out this form</LesserPageTitle>
 
-            <MUForm className='mb-5 mt-10' apps_script_url={webapp_url} whurl={hashed}>
+            <MUForm className='mb-5 mt-10' webhookIdentifier={webhookIdentifier}>
                 <Field required={true} name="Name">Name</Field>
                 <EmailField />
                 <Dropdown label="Age" options={["Yes, 16 or older", "No, I'm younger than 16"]}>
@@ -59,5 +54,5 @@ export default function Volunteer() {
                 </Dropdown>
             </MUForm>
         </MUPage>
-    )
+    );
 }

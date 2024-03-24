@@ -5,56 +5,59 @@ function RedirectToThankYou(): void {
   window.location.href = "thank-you";
 }
 
-function SubmitMUForm(e: React.FormEvent<HTMLFormElement>, url: string, form: any): void {
-  e.preventDefault();
-
-  const form_data = new FormData(form);
-  const form_json: { [key: string]: string } = {};
-
-  form_data.forEach((value, key) => {
-    form_json[key] = value.toString();
-  });
-
-  fetch(url, {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(form_json),
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Response from API:", data);
-    if (data.message === 'Success') {
-      RedirectToThankYou(); // Assuming this is where you redirect after successful submission
-    } else {
+function SubmitMUForm(e: React.FormEvent<HTMLFormElement>, url: string, form: any, webhookIdentifier: string): void {
+    e.preventDefault();
+  
+    const form_data = new FormData(form);
+    const form_json: { [key: string]: string } = {};
+  
+    form_data.forEach((value, key) => {
+      form_json[key] = value.toString();
+    });
+  
+    console.log("Form data being sent:", { ...form_json, whurl: webhookIdentifier }); // Log form data
+  
+    fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...form_json, whurl: webhookIdentifier }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Response from API:", data);
+      if (data.message === 'Success') {
+        RedirectToThankYou(); // Assuming this is where you redirect after successful submission
+      } else {
+        alert("Failed, internal error. Please email us at support@musicunbounded.org with details.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
       alert("Failed, internal error. Please email us at support@musicunbounded.org with details.");
-    }
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    alert("Failed, internal error. Please email us at support@musicunbounded.org with details.");
-  });
-}
+    });
+  }
+  
 
-export default function MUForm(props: { children?: React.ReactNode, className?: string }) {
+export default function MUForm(props: { children?: React.ReactNode, webhookIdentifier: string, className?: string }) {
   const [submit_disabled, SetSubmitDisabled] = useState(false);
   const [submit_button_name, SetSubmitButtonName] = useState("Submit");
 
-  function AttemptSubmission(e: React.FormEvent<HTMLFormElement>, url: string): void {
+  function AttemptSubmission(e: React.FormEvent<HTMLFormElement>, url: string, webhookIdentifier: string): void {
     e.preventDefault();
     if (submit_disabled) {
       return;
     }
     SetSubmitDisabled(true);
     SetSubmitButtonName("Submitting...")
-    SubmitMUForm(e, url, document.forms["main_form"]);
+    SubmitMUForm(e, url, document.forms["main_form"], webhookIdentifier);
   }
 
   return (
     <Bin>
       <div className={props.className}>
-        <form name="main_form" method='post' onSubmit={e => AttemptSubmission(e, "/api/submitForm")}>
+        <form name="main_form" method='post' onSubmit={e => AttemptSubmission(e, "/api/submitForm", props.webhookIdentifier)}>
           {props.children}
           <button disabled={submit_disabled} className='bg-blue-600 text-white p-3 rounded-md' type="submit">{submit_button_name}</button>
         </form>

@@ -2,17 +2,12 @@ import MUForm, { Dropdown, EmailField, Field, PhoneField } from "../components/m
 import MUPage from "../components/page";
 import { BlueWideDiv, Blurb, BlurbTitle, LesserPageTitle, PageTitle } from "../components/util";
 
-/**
- * 
- * @returns teach page
- */
 export default function Teach() {
-    const webapp_url: string = "kwwsv=22vfulsw1jrrjoh1frp2pdfurv2v2DNi|fe}Q7k0dQWM4IrYIV3KJvWKQK\\jRK6ERp3Qg\\:<:xMIPU8o<Y0Z}|FkfJ4;8j0Q<Pr;2h{hf";
-    const whurl: string = "kwwsv=22glvfrug1frp2dsl2zhekrrnv2<;35793474766984942RQXTlKpWKI4j5vn[EyVq7VDnPgVthWo4QrTPYMp;:]:T\\zTr8|bdW|o\\LnFXM\\7Oh{bF";
+    const webhookIdentifier = "teach";
 
     const type_options: string[] = [
         "Fundraising",
-        "Material Development (Helping us imporve our curricula)",
+        "Material Development (Helping us improve our curricula)",
         "Both",
     ];
 
@@ -50,7 +45,7 @@ export default function Teach() {
                     <li>Flexible teaching that matches your schedule</li>
                     <li>Making a difference in your community</li>
                 </ul>
-                <BlurbTitle>Volunteer teachers have recieved recognition for their achievements, such as:</BlurbTitle>
+                <BlurbTitle>Volunteer teachers have received recognition for their achievements, such as:</BlurbTitle>
                 <ul className='list-disc text-lg'>
                     <li>George A. Hansen Scholarship</li>
                     <li>Intuit Scholarship</li>
@@ -67,7 +62,7 @@ export default function Teach() {
 
             <LesserPageTitle>Fill out this form</LesserPageTitle>
 
-            <MUForm className='mb-5 mt-10' apps_script_url={webapp_url} whurl={whurl}>
+            <MUForm className='mb-5 mt-10' webhookIdentifier={webhookIdentifier}>
                 <Field required={true} name="Teacher Name">Name</Field>
                 <EmailField />
                 <Dropdown label="Age" options={["At least 16", "Under 16"]}>Are you 16 years of age or older?</Dropdown>
@@ -75,5 +70,5 @@ export default function Teach() {
                 <Dropdown label="Instrument" options={instrument_options}>Instrument</Dropdown>
             </MUForm>
         </MUPage>
-    )
+    );
 }
