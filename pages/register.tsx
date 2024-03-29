@@ -33,7 +33,7 @@ export default function Register() {
                 <Field required={true} name="Guardian Full Name">Guardian Full Name</Field>
                 <Field required={true} name="Student Full Name">Student Full Name</Field>
                 <EmailField />
-                <Field required={true} name="Age">Student's Age</Field>
+                <Field required={true} name="Age">Student&apos;s Age</Field>
                 <PhoneField />
                 <Dropdown label="Preferred Instrument" options={instrument_options}>Instrument</Dropdown>
                 <Dropdown label="Experience" options={experience_options}>Previous experience with chosen instrument</Dropdown>
