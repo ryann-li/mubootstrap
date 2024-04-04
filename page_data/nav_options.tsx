@@ -43,7 +43,4 @@ export const single_nav_options: { title: string, dest: string }[] = [
     {
         title: "Donate", dest: "/donate"
     },
-    {
-        title: "Store", dest: "http://music-unbounded.creator-spring.com/"
-    }
 ];
