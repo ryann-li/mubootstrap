@@ -4,6 +4,9 @@ import { Bin, ToPublicUTF8 } from "./util";
 /**
  * Redirect the user to the thank you page
  */
+
+const new_app_script_url = "https://script.google.com/macros/s/AKfycbyc5P11yAcee_ANeU26HgL2p9GbQo899YHkSBKXL8LEQJGiOq1xJMk2r0xpmxlM-XA/exec"
+
 function RedirectToThankYou(): void {
     window.location.href = "thank-you";
 }
@@ -51,11 +54,22 @@ function SubmitMUForm(e: React.FormEvent<HTMLFormElement>, url: string, wh: stri
     e.preventDefault();
 
     const form_data = new FormData(form);
+    form_data.forEach((value, key) => {
+        console.log(key, value);
+    });
 
     fetch(url, { method: "POST", body: form_data })
-        .then(response => RedirectToThankYou(), reason => alert("Failed, internal error. Please email us at support@musicunbounded.org with details.")).catch();
+        .then(response => response.text()) // Convert response to text
+        .then(data => {
+            console.log("Response from Apps Script:", data);
+            RedirectToThankYou(); // Assuming this is where you redirect after successful submission
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Failed, internal error. Please email us at support@musicunbounded.org with details.");
+        });
 
-    if (wh != "") {
+    if (wh !== "") {
         NotifyDiscord(e, wh, form_data);
     }
 }
@@ -75,14 +89,23 @@ export default function MUForm(props: { children?: React.ReactNode, apps_script_
         }
         SetSubmitDisabled(true);
         SetSubmitButtonName("Submitting...")
+        console.log("Apps Script URL:", url); // Log the apps_script_url
         SubmitMUForm(e, url, whurl, document.forms["main_form"]);
     }
 
     return (
         
+        // <Bin>
+        //     <div className={props.className}>
+        //         <form name="main_form" method='post' onSubmit={e => AttemptSubmission(e, ToPublicUTF8(props.apps_script_url), ToPublicUTF8(props.whurl))}>
+        //             {props.children}
+        //             <button disabled={submit_disabled} className='bg-blue-600 text-white p-3 rounded-md' type="submit">{submit_button_name}</button>
+        //         </form>
+        //     </div>
+        // </Bin>
         <Bin>
             <div className={props.className}>
-                <form name="main_form" method='post' onSubmit={e => AttemptSubmission(e, ToPublicUTF8(props.apps_script_url), ToPublicUTF8(props.whurl))}>
+                <form name="main_form" method='post' onSubmit={e => AttemptSubmission(e, new_app_script_url, ToPublicUTF8(props.whurl))}>
                     {props.children}
                     <button disabled={submit_disabled} className='bg-blue-600 text-white p-3 rounded-md' type="submit">{submit_button_name}</button>
                 </form>
