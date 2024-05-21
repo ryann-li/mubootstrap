@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const new_app_script_url = "https://script.google.com/macros/s/AKfycbwraoiwRrzNhJ4yFvKjmsCrq2cLgo1bwVoVK01ZfE6SYIyhruVc5QsZpaLIcrnEQK8W/exec";
+const new_app_script_url = process.env.GOOGLE_APP_SCRIPT_URL;
 
-const webhookUrls: { [key: string]: string } = {
-  contact: "https://discord.com/api/webhooks/980246108095782943/VBFWK3HuNLMhw-UAKvAI3I4n6He9pRSfpx3DBCkqAw2GKRXySyxvcVAL1psWrAsi1SMD",
-  register: "https://discord.com/api/webhooks/980245904453935195/eRTTU5B1SU-uc1_mOJIQ-x-nBRxIhyIv9jJ1D9wtGAq2YzRvshdwqnGkHB-F3RW8JTmC",
-  teach: "https://discord.com/api/webhooks/980246014143365161/ONUQiHmTHF1g2skXBvSn4SAkMdSqeTl1NoQMVJm87Z7QYwQo5y_aTylYIkCUJY4Lex_C",
-  volunteer: "https://discord.com/api/webhooks/1028483199631904789/8V4uG7VxJrsHWXw_frXoTu-8gPs3i-SEhZkLlBMZ5izQb2fJ4UNG7-LRKfWJH-ydAMPm",
+const webhookUrls: { [key: string]: string | undefined } = {
+  contact: process.env.DISCORD_WEBHOOK_URL_CONTACT,
+  register: process.env.DISCORD_WEBHOOK_URL_REGISTER,
+  teach: process.env.DISCORD_WEBHOOK_URL_TEACH,
+  volunteer: process.env.DISCORD_WEBHOOK_URL_VOLUNTEER,
 };
 
 async function NotifyDiscord(form: { [key: string]: string }, whurl: string) {
