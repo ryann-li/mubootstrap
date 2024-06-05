@@ -1,6 +1,5 @@
 const request = require('supertest');
 const { createServer } = require('http');
-const { parse } = require('url');
 const handler = require('../pages/api/healthcheck').default;
 
 const createMockResponse = () => {
